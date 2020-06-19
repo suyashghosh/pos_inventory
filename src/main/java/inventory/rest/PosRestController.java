@@ -75,6 +75,10 @@ public class PosRestController {
 		return itemDao.deleteItem(itemDao.getItemById(itemId));
 	}
 	
+	@GetMapping("/getExhaustedItems")
+	public ExhaustedItems getExhaustedItems() {
+		return itemDao.getExhaustedItems();
+	}
 	
 	//Menu
 	
@@ -90,14 +94,6 @@ public class PosRestController {
 		return menuDao.getMenu();
 	}
 	
-	@GetMapping("/removeItemfromMenu/{id}")
-	public Message removeItemfromMenu(@PathVariable String id) {
-		Item item = itemDao.getItemById(id);
-		Menu menu = menuDao.getMenuById("CH");
-		menu.removeItem(item);
-		menuDao.addMenu(menu);
-		return new Message(true, "item removed from Menu");
-	}
 	
 	@GetMapping("/deleteMenu/{id}")
 	public void deleteMenu(@PathVariable String id) {
@@ -130,33 +126,6 @@ public class PosRestController {
 		
 		return msg;
 	}
-	
-//	PostMapping("/addMenu")
-//	public Message addMenu(@RequestBody MenuDetails menuDetails) {
-//		
-//		if (menuDao.checkPresence(menuDetails.getDish())) {
-//			return new Message(false, "Dish already exists");
-//		}
-//		
-//		Menu menu = new Menu();
-//		String menuId = menuDao.generateId(menuDetails.getDish());
-//		
-//		menu.setMenuId(menuId);
-//		menu.setDish(menuDetails.getDish());
-//		for(Item_Quantity item_qty : menuDetails.getItemQuantity()) {
-//			Item item = itemDao.getItemById(item_qty.getItemId());
-//			menu.addItem(item, item_qty.getQuantity());
-//		}
-//
-//		menuDao.addMenu(menu);	
-//		
-//		return new Message(true, "Menu dish added");
-//	}
-	@GetMapping("/getExhaustedItems")
-	public ExhaustedItems getExhaustedItems() {
-		return itemDao.getExhaustedItems();
-	}
-		
 
 }
 
