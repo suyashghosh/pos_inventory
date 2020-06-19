@@ -96,9 +96,9 @@ public class PosRestController {
 	
 	
 	@GetMapping("/deleteMenu/{id}")
-	public void deleteMenu(@PathVariable String id) {
-		
+	public Message deleteMenu(@PathVariable String id) {		
 		menuDao.deleteMenu(menuDao.getMenuById(id));
+		return new Message(true, "Menu dish deleted");
 	}
 	
 	@PostMapping("/addMenu")
